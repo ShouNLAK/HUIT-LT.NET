@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,8 +67,8 @@ namespace _38_NguyenLeAnhKhoa_Tuan01
             if (txt_hoTen.Text == string.Empty)
             {
                 MessageBox.Show("Phải nhập đầy đủ họ tên", "Lỗi dữ liệu", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            txt_hoTen.Focus();
         }
     }
 }
