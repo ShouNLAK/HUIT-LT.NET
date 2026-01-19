@@ -1,0 +1,11 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan01.BTM2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bài tập mẫu 2" Height="225" Width="573">
+    <StackPanel Margin="10">
+        <Label Content="Họ và tên :"/>
+        <TextBox x:Name="txt_hoTen" Height="32" TextWrapping="Wrap" Width="453" Padding="5"/>
+        <Button x:Name="btn_xinChao" Content="Xin chào" Width="178" Height="38" Margin="10" Click="btn_xinChao_Click"/>
+        <Label x:Name="lbl_thongBao" Content="" Margin="46,0"/>
+    </StackPanel>
+</Window>

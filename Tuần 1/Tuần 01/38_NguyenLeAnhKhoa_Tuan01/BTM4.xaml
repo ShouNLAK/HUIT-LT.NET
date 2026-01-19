@@ -1,0 +1,26 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan01.BTM4"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bài tập mẫu 4" Height="400" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="250"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Họ và tên:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
+        <Label Content="Tuổi :" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="80"/>
+        <Button x:Name="btn_gui" Content="Gửi" Grid.Column="1" HorizontalAlignment="Left" Margin="120,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="131" Height="30" FontWeight="Bold" FontSize="16" Click="btn_gui_Click"/>
+        <TextBox x:Name="txt_hoTen" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372" LostFocus="txt_hoTen_LostFocus"/>
+        <TextBox x:Name="txt_soTuoi" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+        <TextBox x:Name="txt_ketQua" Grid.Column="1" HorizontalAlignment="Left" Height="186" Margin="10,23,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+
+        <Label Content="Hiển thị kết quả" Grid.Column="1" Margin="24,10,270,209" Grid.Row="3" FontWeight="Bold" Background="White"/>
+
+    </Grid>
+</Window>
