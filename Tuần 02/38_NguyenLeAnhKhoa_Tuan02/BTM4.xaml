@@ -1,0 +1,54 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan02.BTM4"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Giải hệ phương trình" Height="380" Width="500" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="HeSo" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10,5,0,0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="55"/>
+        </Style>
+        <Style x:Key="Nut" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Giải hệ phương trình" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontWeight="Bold" FontSize="24" Margin="124,0" Height="42" Width="244"/>
+        <GroupBox Header="Chọn loại phương trình" HorizontalAlignment="Center" VerticalAlignment="Center" Height="66" Margin="10,4,10,10" Width="472" Grid.Row="1">
+            <StackPanel HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="452" Margin="4,4,0,0">
+                <RadioButton x:Name="chk_PTB1" Content="Phương trình bậc nhất - ax + b = 0" Checked="chk_PTB1_Checked"/>
+                <RadioButton x:Name="chk_PTB2" Content="Phương trình bậc hai - ax² + bx + c = 0" Checked="chk_PTB2_Checked"/>
+            </StackPanel>
+        </GroupBox>
+        <Grid HorizontalAlignment="Right" Height="200" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" Width="472">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="322"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Hệ số a:" Style="{StaticResource HeSo}"/>
+            <Label Content="Hệ số b:" Grid.Row="1" Style="{StaticResource HeSo}"/>
+            <Label Content="Hệ số c:" Grid.Row="2" Style="{StaticResource HeSo}"/>
+            <TextBox x:Name="txt_A" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302" LostFocus="txt_A_LostFocus"/>
+            <TextBox x:Name="txt_B" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302" Grid.Row="1"/>
+            <TextBox x:Name="txt_C" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="302" Grid.Row="2"/>
+            <Label Content="Kết quả :" Grid.Row="3" Style="{StaticResource HeSo}" Margin="10,35,5,30" Width="Auto" Foreground="Red"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Height="75" Width="302"/>
+            <Button x:Name="btn_giai" Content="Giải" Grid.Column="2" Style="{StaticResource Nut}" Background="#FFEAEAEA" Foreground="#FF8B8B8B" IsEnabledChanged="btn_giai_IsEnabledChanged"/>
+            <Button x:Name="btn_exit" Content="Thoát" Grid.Column="2" Style="{StaticResource Nut}" Background="#FF999999" Foreground="White" Grid.Row="1" Click="btn_exit_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>
