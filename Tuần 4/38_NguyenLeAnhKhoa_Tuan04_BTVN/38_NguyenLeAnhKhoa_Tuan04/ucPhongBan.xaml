@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="_38_NguyenLeAnhKhoa_Tuan04.ucPhongBan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="THÔNG TIN PHÒNG BAN" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,0,0,15"/>
+
+        <Label Content="Mã phòng ban :" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtMaPB" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="25"/>
+
+        <Label Content="Tên phòng ban :" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtTenPB" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Height="25"/>
+
+        <Label Content="Địa điểm :" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtDiaDiem" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Height="25"/>
+
+        <WrapPanel Grid.Row="4" Grid.Column="1" Margin="0,20,0,0" HorizontalAlignment="Left">
+            <Button x:Name="btnLuu" Content="Lưu" Width="80" Height="25" Click="btnLuu_Click"/>
+            <Button x:Name="btnThoat" Content="Thoát" Width="80" Height="25" Margin="25,0,0,0" Click="btnThoat_Click"/>
+        </WrapPanel>
+
+    </Grid>
+</UserControl>

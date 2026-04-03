@@ -1,0 +1,120 @@
+public partial class BTTL3 : Window
+{
+    public TreeViewItem rootItem;
+    public BTTL3()
+    {
+        InitializeComponent();
+    }
+
+    private void menuSinhVien_Click(object sender, RoutedEventArgs e)
+    {
+        MainContent.Content = new ucSinhVien();
+    }
+
+    private void menuLopHoc_Click(object sender, RoutedEventArgs e)
+    {
+        MainContent.Content = new ucLopHoc();
+    }
+    public void AddSinhVienToTreeView(SinhVien sv)
+    {
+        TreeViewItem item = new TreeViewItem
+        {
+            Header = sv.MaSV + " - " + sv.HoTen,
+            Tag = sv
+        };
+
+        rootItem.Items.Add(item);
+    }
+    public bool IsMaSinhVienTonTai(string maSV)
+    {
+        foreach (TreeViewItem item in rootItem.Items)
+        {
+            SinhVien sv = item.Tag as SinhVien;
+            if (sv != null && sv.MaSV.Equals(maSV, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        rootItem = new TreeViewItem()
+        {
+            Header = "Danh sách sinh viên",
+            IsExpanded = true
+        };
+        tvSinhVien.Items.Add(rootItem);
+
+        AddSinhVienToTreeView(new SinhVien
+        {
+            MaSV = "2001001",
+            HoTen = "Nguyễn Văn A",
+            NgaySinh = new DateTime(2003, 5, 10),
+            GioiTinh = "Nam",
+            SoThich = new List<string> { "Thể thao", "Âm nhạc" },
+            Lop = "15DHTH01"
+        });
+        AddSinhVienToTreeView(new SinhVien
+        {
+            MaSV = "2001002",
+            HoTen = "Trần Thị B",
+            NgaySinh = new DateTime(2003, 8, 22),
+            GioiTinh = "Nữ",
+            Lop = "15DHTH01",
+            SoThich = new List<string> { "Du lịch" }
+        });
+    }
+
+    private void tvSinhVien_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    {
+        TreeViewItem item = tvSinhVien.SelectedItem as TreeViewItem;
+        if (item == null || item.Tag == null)
+            return;
+
+        SinhVien sv = item.Tag as SinhVien;
+        if (sv == null)
+            return;
+
+        ucSinhVien uc = MainContent.Content as ucSinhVien;
+        if (uc == null)
+            return;
+
+        uc.btn_Xoa.IsEnabled = true;
+        // Hiển thị thông tin cơ bản
+        uc.txtMaSV.Text = sv.MaSV;
+        uc.txtHoTen.Text = sv.HoTen;
+        uc.dpNgaySinh.SelectedDate = sv.NgaySinh;
+        uc.cboLop.Text = sv.Lop;
+
+        if (sv.GioiTinh == "Nam")
+            uc.rbNam.IsChecked = true;
+        else
+            uc.rbNu.IsChecked = true;
+
+        //HIỂN THỊ SỞ THÍCH
+        uc.chkTheThao.IsChecked = sv.SoThich.Contains("Thể thao");
+        uc.chkAmNhac.IsChecked = sv.SoThich.Contains("Âm nhạc");
+        uc.chkDuLich.IsChecked = sv.SoThich.Contains("Du lịch");
+
+        uc.btn_Luu.IsEnabled = false;
+        uc.SetReadOnly(true);
+    }
+
+    private void btnToolbar_Them_Click(object sender, RoutedEventArgs e)
+    {
+        if (MainContent.Content is ucSinhVien uc)
+        {                
+            uc.ThemSinhVien();
+        }
+    }
+
+    private void btnToolBar_Xoa_Click(object sender, RoutedEventArgs e)
+    {
+        if (MainContent.Content is ucSinhVien uc)
+        {
+            uc.XoaSinhVien();
+        }
+    }
+}

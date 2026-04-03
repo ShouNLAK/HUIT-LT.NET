@@ -1,0 +1,62 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan05.View.StudentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan05.View"
+        xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan05.ViewModel"
+        mc:Ignorable="d"
+        Title="Bài tập mẫu 1" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:StudentViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Danh sách sinh viên" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="Bold" Foreground="#FF0010FF" Height="58" Width="344"/>
+        <DataGrid x:Name="dtg_dssv" Grid.Row="3" Margin="10,10,10,10" ItemsSource="{Binding StudentsView}" SelectedItem="{Binding SelectedStudent,Mode=TwoWay}" Grid.RowSpan="2" AutoGenerateColumns="False" SelectionChanged="dtg_dssv_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Họ và tên" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Tuổi" Binding="{Binding Age}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox Header="Thông tin sinh viên" Grid.Row="1">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Label Content="Họ và Tên :" HorizontalAlignment="Center" Margin="30,14,30,0" VerticalAlignment="Top"/>
+                <Label Content="Tuổi :" HorizontalAlignment="Center" Margin="30,14,30,0" VerticalAlignment="Top" Grid.Row="1"/>
+                <TextBox x:Name="txt_hoTen" Text="{Binding NewName ,Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="428"/>
+                <TextBox x:Name="txt_tuoi" Text="{Binding NewAge ,Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="428" Grid.Row="1"/>
+                <Button x:Name="btn_ThemSV" Grid.Column="2" Content="Thêm sinh viên" HorizontalAlignment="Left" Margin="50,13,50,0" VerticalAlignment="Top" Height="27" Width="100" Click="btn_ThemSV_Click"/>
+                <Button x:Name="btn_XoaSV" Grid.Column="2" Content="Xóa sinh viên" HorizontalAlignment="Left" Margin="50,0,50,0" VerticalAlignment="Center" Height="27" Width="100" Grid.Row="1" Click="btn_XoaSV_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Lọc và sắp xếp" Grid.Row="2" Background="#FFBEFEFF">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="100"/>
+                    <ColumnDefinition Width="Auto" MinWidth="375"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Tìm tên :" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Width="56"/>
+                <TextBox Text="{Binding FilterText,Mode=TwoWay}"  Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="350" Height="30"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10,10,10,10">
+                    <Button x:Name="btn_Loc" Content="Lọc" Margin="10,0,10,0" Height="30" Width="75" Click="btn_Loc_Click"/>
+                    <Button x:Name="btn_SapXep" Content="Sắp xếp theo độ tuổi" Margin="10,0,10,0" Height="30" Width="150" Click="btn_SapXep_Click" />
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

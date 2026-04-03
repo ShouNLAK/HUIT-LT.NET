@@ -1,0 +1,175 @@
+<Window x:Class="_38_NguyenLeAnhKhoa_Tuan06.View.ClassView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan06.ViewModel"
+        mc:Ignorable="d"
+        Title="ClassView" Height="760" Width="1000">
+    <Window.DataContext>
+        <vm:ClassViewModel />
+    </Window.DataContext>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="15,10" Margin="0,0,0,15">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock Text="QUẢN LÝ LỚP HỌC" FontSize="20" FontWeight="Bold" Foreground="#1A1A1A"/>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="White" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="15" Margin="0,0,15,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Danh sách lớp" FontWeight="Bold" FontSize="14" Margin="0,0,0,10" />
+
+                    <TreeView Grid.Row="1" x:Name="tvClasses" ItemsSource="{Binding Classes}" SelectedItemChanged="tvClasses_SelectedItemChanged" Background="Transparent" BorderThickness="0">
+                        <TreeView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TenLop}" Padding="4" />
+                            </DataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+
+                    <StackPanel Grid.Row="2" Margin="0,15,0,0">
+                        <TextBlock Text="Quản lý lớp" FontWeight="Bold" FontSize="14" />
+                        <TextBlock Text="Thêm / Xóa một lớp." Foreground="#888888" FontSize="11" Margin="0,2,0,8" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding NewClassName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="0,0,8,0" Height="30" />
+                            <Button Grid.Column="1" Content="+ Thêm" Width="70" Height="30" Background="#0d6efd" Foreground="White" BorderThickness="0" Command="{Binding AddClassCommand}" />
+                        </Grid>
+                        <Button Content="🗑 Xóa lớp" Height="30" Margin="0,10,0,0" Background="#dc3545" Foreground="White" BorderThickness="0" Command="{Binding RemoveClassCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height ="3*"/>
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="10,12" Margin="0,0,0,15" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Nhập thông tin tìm kiếm:" VerticalAlignment="Center" Margin="10,0,10,0" Foreground="#333333"/>
+                        <TextBox Grid.Column="1" VerticalContentAlignment="Center" Height="30" Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="2" Content="🔍 Tìm" Width="80" Height="30" Margin="10,0,0,0" Background="#0d6efd" Foreground="White" BorderThickness="0" Command="{Binding SearchCommand}"/>
+                        <Button Grid.Column="3" Content="👁 Hiển thị tất cả" Width="120" Height="30" Margin="10,0,0,0" Background="#dc3545" Foreground="White" BorderThickness="0" Command="{Binding ShowAllCommand}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="15" Background="White" Margin="0,0,0,214" Grid.RowSpan="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding StudentCountInSelectedClass, StringFormat='Danh sách sinh viên (\{0\})'}" FontWeight="Bold" FontSize="14" Margin="0,0,0,10" />
+
+                        <DataGrid Grid.Row="1" ItemsSource="{Binding FilteredStudents}" SelectedItem="{Binding SelectedStudent, Mode=TwoWay}" AutoGenerateColumns="False" AlternatingRowBackground="#F9F9F9" HeadersVisibility="Column" Background="Transparent" RowBackground="White" BorderBrush="#EAEAEA" HorizontalGridLinesBrush="#EAEAEA" VerticalGridLinesBrush="Transparent">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã sinh viên" Binding="{Binding MaSV}" Width="1*" />
+                                <DataGridTextColumn Header="Họ và Tên" Binding="{Binding HoTen}" Width="2*" />
+                                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}" Width="2*" />
+                                <DataGridTextColumn Header="Điểm 1" Binding="{Binding Diem1}" Width="1*" />
+                                <DataGridTextColumn Header="Điểm 2" Binding="{Binding Diem2}" Width="1*" />
+                                <DataGridTextColumn Header="Điểm 3" Binding="{Binding Diem3}" Width="1*" />
+                                <DataGridTextColumn Header="Điểm TB" Binding="{Binding DiemTB}" Width="1*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="8" Padding="15" Margin="0,15,0,0" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,20,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Mã Sinh viên" VerticalAlignment="Center" Foreground="#555555"/>
+                            <TextBox Grid.Column="1" Text="{Binding MaSVInput, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}" VerticalContentAlignment="Center" Height="28"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,20,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Họ và Tên" VerticalAlignment="Center" Foreground="#555555"/>
+                            <TextBox Grid.Column="1" Text="{Binding HoTenInput, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}" VerticalContentAlignment="Center" Height="28"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.Column="0" Margin="0,0,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Điểm" VerticalAlignment="Center" Foreground="#555555"/>
+                            <TextBox Grid.Column="1" Margin="0,0,5,0" Text="{Binding Diem1Input, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}" VerticalContentAlignment="Center" Height="28"/>
+                            <TextBox Grid.Column="2" Margin="5,0,5,0" Text="{Binding Diem2Input, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}" VerticalContentAlignment="Center" Height="28"/>
+                            <TextBox Grid.Column="3" Margin="5,0,0,0" Text="{Binding Diem3Input, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}" VerticalContentAlignment="Center" Height="28"/>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,20,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Lớp" VerticalAlignment="Center" Foreground="#555555"/>
+                            <ComboBox Grid.Column="1" ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass, Mode=OneWay}" DisplayMemberPath="TenLop" IsEnabled="False" VerticalContentAlignment="Center" Height="28"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,20,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Địa chỉ" VerticalAlignment="Center" Foreground="#555555"/>
+                            <TextBox Grid.Column="1" Text="{Binding DiaChiInput, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}" VerticalContentAlignment="Center" Height="28"/>
+                        </Grid>
+                        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Width="100" Margin="10,0,0,0">
+                            <TextBlock Text="Thao tác" FontWeight="Bold" Margin="0,0,0,8" Foreground="#333333" />
+                            <Button Content="{Binding AddButtonText}" Height="30" Margin="0,0,0,8" Background="#0d6efd" Foreground="White" BorderThickness="0" Command="{Binding AddCommand}" />
+                            <Button Content="{Binding EditButtonText}" Height="30" Margin="0,0,0,8" Background="#f8f9fa" Foreground="Black" BorderBrush="#ced4da" Command="{Binding EditCommand}" />
+                            <Button Content="Lưu" Height="30" Margin="0,0,0,8" Background="#0d6efd" Foreground="White" BorderThickness="0" Command="{Binding SaveCommand}" />
+                            <Button Content="Xóa" Height="30" Margin="0,0,0,0" Background="#dc3545" Foreground="White" BorderThickness="0" Command="{Binding DeleteCommand}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

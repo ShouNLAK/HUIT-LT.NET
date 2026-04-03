@@ -1,0 +1,170 @@
+public partial class ucSinhVien : UserControl
+{
+    public ucSinhVien()
+    {
+        InitializeComponent();
+    }
+
+    private void btn_LamMoi_Click(object sender, RoutedEventArgs e)
+    {
+        ClearForm();
+        SetReadOnly(false);
+        btn_Luu.IsEnabled = true;
+        btn_Xoa.IsEnabled = false;
+        txtMaSV.Focus();
+        cboLop.SelectedIndex = 0;
+        rbNam.IsChecked = true; 
+    }
+    private void ClearForm()
+    {
+        txtMaSV.Text = "";
+        txtHoTen.Text = "";
+        dpNgaySinh.SelectedDate = null;
+
+        rbNam.IsChecked = false;
+        rbNu.IsChecked = false;
+
+        chkTheThao.IsChecked = false;
+        chkAmNhac.IsChecked = false;
+        chkDuLich.IsChecked = false;
+
+        cboLop.SelectedIndex = -1;
+        txtMaSV.Focus();
+    }
+    public void SetReadOnly(bool isReadOnly)
+    {
+        txtMaSV.IsReadOnly = isReadOnly;
+        txtHoTen.IsReadOnly = isReadOnly;
+
+        dpNgaySinh.IsEnabled = !isReadOnly;
+        rbNam.IsEnabled = !isReadOnly;
+        rbNu.IsEnabled = !isReadOnly;
+
+        chkTheThao.IsEnabled = !isReadOnly;
+        chkAmNhac.IsEnabled = !isReadOnly;
+        chkDuLich.IsEnabled = !isReadOnly;
+
+        cboLop.IsEnabled = !isReadOnly;
+    }
+
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    {
+        btn_Xoa.IsEnabled = false;
+        txtMaSV.Focus();
+    }
+    public void ThemSinhVien()
+    {
+        // 1. Kiểm tra dữ liệu bắt buộc
+        if (string.IsNullOrWhiteSpace(txtMaSV.Text))
+        {
+            MessageBox.Show("Mã sinh viên không được để trống!");
+            txtMaSV.Focus();
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(txtHoTen.Text))
+        {
+            MessageBox.Show("Họ tên không được để trống!");
+            txtHoTen.Focus();
+            return;
+        }
+
+        // 2. Lấy MainWindow
+        BTTL3 main = Application.Current.MainWindow as BTTL3;
+        if (main == null)
+            return;
+
+        // 3. Kiểm tra trùng mã sinh viên
+        if (main.IsMaSinhVienTonTai(txtMaSV.Text))
+        {
+            MessageBox.Show("Mã sinh viên đã tồn tại!");
+            txtMaSV.Focus();
+            return;
+        }
+
+        // 4. Lấy danh sách sở thích
+        List<string> soThich = new List<string>();
+
+        if (chkTheThao.IsChecked == true)
+            soThich.Add("Thể thao");
+
+        if (chkAmNhac.IsChecked == true)
+            soThich.Add("Âm nhạc");
+
+        if (chkDuLich.IsChecked == true)
+            soThich.Add("Du lịch");
+
+        // 5. Tạo đối tượng SinhVien
+        SinhVien sv = new SinhVien
+        {
+            MaSV = txtMaSV.Text.Trim(),
+            HoTen = txtHoTen.Text.Trim(),
+            NgaySinh = dpNgaySinh.SelectedDate ?? DateTime.Now,
+            GioiTinh = rbNam.IsChecked == true ? "Nam" : "Nữ",
+            Lop = cboLop.Text,
+            SoThich = soThich
+        };
+
+        // 6. Thêm vào TreeView
+        main.AddSinhVienToTreeView(sv);
+
+        // 7. Thông báo
+        MessageBox.Show("Thêm sinh viên thành công!", "Thông báo");
+
+        // 8. Làm mới form
+        ClearForm();
+    }
+    private void btn_Luu_Click(object sender, RoutedEventArgs e)
+    {
+        ThemSinhVien();
+    }
+    public void XoaSinhVien()
+    {
+        // 1. Lấy MainWindow
+        BTTL3 main = Application.Current.MainWindow as BTTL3;
+        if (main == null)
+            return;
+
+        // 2. Lấy thông tin sinh viên
+        TreeViewItem selectedItem = main.tvSinhVien.SelectedItem as TreeViewItem;
+        SinhVien sv = selectedItem.Tag as SinhVien;
+        if (sv == null)
+            return;
+
+        // 3. Hỏi xác nhận
+        MessageBoxResult result = MessageBox.Show(
+            "Bạn có chắc chắn muốn xóa sinh viên này không?",
+            "Xác nhận xóa",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question);
+
+        if (result == MessageBoxResult.No)
+            return;
+
+        // 4. Xóa sinh viên khỏi TreeView
+        main.rootItem.Items.Remove(selectedItem);
+
+        // 5. Thông báo
+        MessageBox.Show("Xóa sinh viên thành công!", "Thông báo");
+
+        // 6. Chọn sinh viên đầu tiên
+        // Sau khi xóa → chọn sinh viên đầu tiên (nếu còn)
+        if (main.rootItem.Items.Count > 0)
+        {
+            TreeViewItem firstItem = main.rootItem.Items[0] as TreeViewItem;
+            firstItem.IsSelected = true;
+            firstItem.BringIntoView();
+        }
+        else
+        {
+            // Không còn sinh viên → quay về chế độ thêm
+            ClearForm();
+            SetReadOnly(false);
+            btn_Luu.IsEnabled = true;
+        }
+    }
+    private void btn_Xoa_Click(object sender, RoutedEventArgs e)
+    {
+        XoaSinhVien();
+    }
+}

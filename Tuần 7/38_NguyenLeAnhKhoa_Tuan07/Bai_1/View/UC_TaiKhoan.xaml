@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="_38_NguyenLeAnhKhoa_Tuan07.Bai_1.View.UC_TaiKhoan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan07.Bai_1.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10,10,10,10" Margin="5,5,5,5" Background="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Quản lý tài khoản" FontWeight="Bold" FontSize="24" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Tổng tài khoản" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding TongSoTaiKhoanText}" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Tổng số dư" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding TongSoDuHeThongText}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" CornerRadius="10,10,10,10" Margin="5,5,5,5" Background="White">
+            <StackPanel>
+                <Label Content="Danh sách tài khoản" FontWeight="Bold"/>
+                <DataGrid Height="140" SelectedItem="{Binding SelectedAccount}" ItemsSource="{Binding DSTK}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Số TK" Width="1*" Binding="{Binding SoTK}"/>
+                        <DataGridTextColumn Header="Chủ tài khoản" Width="4*" Binding="{Binding ChuTK}"/>
+                        <DataGridTextColumn Header="Loại TK" Width="2*" Binding="{Binding LoaiTK}"/>
+                        <DataGridTextColumn Header="Số dư" Width="2*" Binding="{Binding SoDu}"/>
+                        <DataGridTextColumn Header="Trạng thái" Width="1*" Binding="{Binding TrangThai}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" CornerRadius="10,10,10,10" Margin="5,5,5,5" Background="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0" Orientation="Horizontal">
+                    <Label Content="Số tài khoản :" Margin="0,0,20,0"/>
+                    <TextBox TextWrapping="Wrap" Width="193" Text="{Binding SoTK, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSoTKEnable}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Margin="10,0,10,0" Orientation="Horizontal">
+                    <Label Content="Chủ tài khoản :" Margin="0,0,13,0"/>
+                    <TextBox TextWrapping="Wrap" Width="193" Text="{Binding ChuTK, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Margin="10,0,10,0" Orientation="Horizontal">
+                    <Label Content="Số dư ban đầu :" Margin="0,0,9,0"/>
+                    <TextBox TextWrapping="Wrap" Width="193" Text="{Binding SoDu, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsInputEnabled}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10,0,10,0" Orientation="Horizontal">
+                    <Label Content="Trạng thái :" Margin="0,0,34,0"/>
+                    <ComboBox Width="193" ItemsSource="{Binding DSTT}" SelectedItem="{Binding TrangThai}" IsEnabled="{Binding IsInputEnabled}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10,0,10,0" Orientation="Horizontal">
+                    <Label Content="Loại tài khoản :" Margin="0,0,12,0"/>
+                    <ComboBox Width="193" ItemsSource="{Binding DSLTK}" SelectedItem="{Binding LoaiTK}" IsEnabled="{Binding IsInputEnabled}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Grid.RowSpan="3">
+                    <Label Content="Thao tác" FontWeight="Bold"/>
+                    <Button Content="{Binding AddButtonText}" Margin="5,0,5,10" Height="25" Background="#FF0027FF" Foreground="White" FontWeight="Bold" Command="{Binding AddCommand}" />
+                    <Button Content="{Binding EditButtonText}" Margin="5,0,5,10" Height="25" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Foreground="Black" FontWeight="Bold" Command="{Binding EditCommand}"/>
+                    <Button Content="Lưu" Margin="5,0,5,10" Height="25" Background="#FF0027FF" Foreground="White" FontWeight="Bold" Command="{Binding SaveCommand}"/>
+                    <Button Content="Xóa" Margin="5,0,5,10" Height="25" Background="Red" Foreground="White" FontWeight="Bold" Command="{Binding DeleteCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

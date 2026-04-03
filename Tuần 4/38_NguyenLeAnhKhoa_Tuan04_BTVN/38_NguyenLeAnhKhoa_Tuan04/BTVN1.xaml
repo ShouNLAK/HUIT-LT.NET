@@ -1,0 +1,54 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan04.BTVN1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quản lý Hồ sơ Nhân viên" Height="500" Width="850" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Hệ thống">
+                <MenuItem Header="Đổi mật khẩu"/>
+                <MenuItem Header="Đăng xuất"/>
+                <MenuItem Header="Thoát" Click="MenuThoat_Click"/>
+            </MenuItem>
+            <MenuItem Header="Danh mục">
+                <MenuItem Header="Nhân viên" Click="MenuNhanVien_Click"/>
+            </MenuItem>
+            <MenuItem Header="Chấm công"/>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Phòng ban" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TreeView x:Name="tvPhongBan" Grid.Row="1" SelectedItemChanged="tvPhongBan_SelectedItemChanged"/>
+                <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                    <TextBlock Text="Phòng ban" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtTenPhongBan" Height="25" Margin="0,0,0,5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnThemPhongBan" Content="Thêm phòng ban" Grid.Column="0" Margin="0,0,5,0" Height="25" Click="btnThemPhongBan_Click"/>
+                        <Button x:Name="btnXoaPhongBan" Content="Xóa phòng ban" Grid.Column="1" Margin="5,0,0,0" Height="25" Click="btnXoaPhongBan_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <ContentControl x:Name="MainContent" Grid.Column="1" Margin="10"/>
+        </Grid>
+    </Grid>
+</Window>

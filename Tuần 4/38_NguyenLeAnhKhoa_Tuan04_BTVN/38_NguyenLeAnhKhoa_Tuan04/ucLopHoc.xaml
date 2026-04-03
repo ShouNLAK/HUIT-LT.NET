@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="_38_NguyenLeAnhKhoa_Tuan04.ucLopHoc"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan04"
+             mc:Ignorable="d" 
+             d:DesignHeight="370" d:DesignWidth="550">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Thông tin lớp học" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <Label Content="Mã lớp :" HorizontalAlignment="Center" Width="140" Grid.Row="0" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Height="30"/>
+        <Label Content="Tên lớp :" HorizontalAlignment="Center" Width="140" Grid.Row="1" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Height="30"/>
+        <Label Content="Sĩ số lớp :" HorizontalAlignment="Center" Width="140" Grid.Row="2" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Height="30"/>
+        <Label Content="Giảng viên cố vấn :" HorizontalAlignment="Center" Width="170" Grid.Row="3" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Height="30"/>
+        <TextBox x:Name="txt_MaLop" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="370" Grid.Row="0" Height="38"/>
+        <TextBox x:Name="txt_TenLop" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="370" Grid.Row="1" Height="38"/>
+        <TextBlock x:Name="txt_SiSo" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="370" Grid.Row="2" Height="38" Padding="5,10,0,0"/>
+        <TextBox x:Name="txt_GV" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="370" Grid.Row="3" Height="38"/>
+        <WrapPanel Grid.Row="4" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,10,0">
+            <Button x:Name="btn_Luu" Content="Lưu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Click="btn_Luu_Click"/>
+            <Button x:Name="btn_Xoa" Content="Xóa" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,0,0,0" Click="btn_Xoa_Click"/>
+            <Button x:Name="btn_LamMoi" Content="Làm mới" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,0,0,0" Click="btn_LamMoi_Click"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>

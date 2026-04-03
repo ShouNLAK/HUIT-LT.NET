@@ -1,0 +1,84 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan05.View.TodoView_BTVN"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan05.View"
+        mc:Ignorable="d"
+        Title="Quản lý công việc" Height="700" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,20,0,20">
+            <TextBlock Text="QUẢN LÝ CÔNG VIỆC" FontWeight="Bold" FontSize="44" HorizontalAlignment="Center"/>
+            <TextBlock Text="Todo List - WPF MVVM" FontStyle="Italic" Foreground="Gray" FontSize="18" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="20,0,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Nhập công việc" Margin="0,0,10,0">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" Height="32" Margin="0,0,0,10" Text="{Binding TenCongViecMoi,Mode=TwoWay}"/>
+                    <ComboBox Grid.Row="1" Height="32" Margin="0,0,0,10" ItemsSource="{Binding DanhSachMucDoUuTien}" SelectedItem="{Binding MucDoUuTienMoi,Mode=TwoWay}"/>
+                    <CheckBox Grid.Row="2" Content="Đã hoàn thành" Margin="0,0,0,10" IsChecked="{Binding DaHoanThanhMoi,Mode=TwoWay}"/>
+                    <TextBox Grid.Row="3" Height="90" Margin="0,0,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Text="{Binding GhiChuMoi,Mode=TwoWay}"/>
+
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button x:Name="btn_Them" Content="Thêm" Width="120" Height="34" Margin="0,0,10,0" Click="btn_Them_Click"/>
+                        <Button x:Name="btn_Xoa" Content="Xóa" Width="120" Height="34" Margin="0,0,10,0" Click="btn_Xoa_Click"/>
+                        <Button x:Name="btn_LamMoi" Content="Làm mới" Width="120" Height="34" Click="btn_LamMoi_Click"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Lưu / Tải dữ liệu" Grid.Column="1" Margin="10,0,0,0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button x:Name="btn_LuuJSON" Content="Lưu ra JSON" Width="180" Height="38" Margin="0,0,0,12" Click="btn_LuuJSON_Click"/>
+                    <Button x:Name="btn_TaiJSON" Content="Tải từ JSON" Width="180" Height="38" Click="btn_TaiJSON_Click"/>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="20,16,20,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" Height="32" Margin="0,0,10,0" VerticalContentAlignment="Center"
+                     Text="{Binding TuKhoaTimKiem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Border Grid.Column="1" Background="#FFE4E7EA" CornerRadius="6">
+                <TextBlock Text="{Binding TongCongViec,StringFormat=Tổng công việc: {0}}" FontWeight="Bold" FontSize="22"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </Grid>
+
+        <DataGrid Grid.Row="3" Margin="20,0,20,20" AutoGenerateColumns="False"
+                  ItemsSource="{Binding DanhSachCongViecView}" SelectedItem="{Binding CongViecDuocChon,Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên công việc" Binding="{Binding TenCongViec}" Width="3*"/>
+                <DataGridTextColumn Header="Ưu tiên" Binding="{Binding MucDoUuTien}" Width="2*"/>
+                <DataGridCheckBoxColumn Header="Hoàn thành" Binding="{Binding DaHoanThanh}" Width="2*"/>
+                <DataGridTextColumn Header="Ghi chú" Binding="{Binding GhiChu}" Width="4*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

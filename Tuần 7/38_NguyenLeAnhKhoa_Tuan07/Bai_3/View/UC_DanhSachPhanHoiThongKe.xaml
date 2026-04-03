@@ -1,0 +1,70 @@
+<UserControl x:Class="_38_NguyenLeAnhKhoa_Tuan07.Bai_3.View.UC_DanhSachPhanHoiThongKe"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="650"
+             d:DesignWidth="980">
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Danh sách phản hồi và thống kê" FontSize="24" FontWeight="Bold" Foreground="#FF1E293B" DockPanel.Dock="Left" />
+            <Button Content="Làm mới"
+                    Width="110"
+                    Height="34"
+                    DockPanel.Dock="Right"
+                    Background="#FF2563EB"
+                    Foreground="White"
+                    BorderThickness="0"
+                    FontWeight="SemiBold"
+                    Command="{Binding LamMoiCommand}" />
+        </DockPanel>
+
+        <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,12">
+            <Border CornerRadius="8" Background="#FFEFF6FF" BorderBrush="#FFBFDBFE" BorderThickness="1" Padding="12" Margin="0,0,8,0">
+                <StackPanel>
+                    <TextBlock Text="Tổng phản hồi" Foreground="#FF334155" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding TongSoPhanHoi}" FontSize="28" FontWeight="Bold" Foreground="#FF1D4ED8" />
+                </StackPanel>
+            </Border>
+
+            <Border CornerRadius="8" Background="#FFF0FDF4" BorderBrush="#FFBBF7D0" BorderThickness="1" Padding="12" Margin="4,0">
+                <StackPanel>
+                    <TextBlock Text="Điểm trung bình" Foreground="#FF334155" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding DiemTrungBinhTatCaText}" FontSize="28" FontWeight="Bold" Foreground="#FF15803D" />
+                </StackPanel>
+            </Border>
+
+            <Border CornerRadius="8" Background="#FFFFF7ED" BorderBrush="#FFFED7AA" BorderThickness="1" Padding="12" Margin="8,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Chưa xử lý" Foreground="#FF334155" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding SoPhanHoiChuaXuLy}" FontSize="28" FontWeight="Bold" Foreground="#FFC2410C" />
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <DataGrid Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal"
+                  ItemsSource="{Binding DanhSachPhanHoiHienThi}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã" Binding="{Binding MaPhanHoi}" Width="80" />
+                <DataGridTextColumn Header="Khách hàng" Binding="{Binding ThongTinKhach.TenKhachHang}" Width="160" />
+                <DataGridTextColumn Header="Điện thoại" Binding="{Binding ThongTinKhach.SoDienThoai}" Width="120" />
+                <DataGridTextColumn Header="Ngày phản hồi" Binding="{Binding NgayPhanHoi, StringFormat=dd/MM/yyyy HH:mm}" Width="140" />
+                <DataGridTextColumn Header="Điểm TB" Binding="{Binding DiemTrungBinhText}" Width="90" />
+                <DataGridTextColumn Header="Góp ý" Binding="{Binding GopYThem}" Width="*" />
+                <DataGridCheckBoxColumn Header="Đã xử lý" Binding="{Binding DaXuLy}" Width="90" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

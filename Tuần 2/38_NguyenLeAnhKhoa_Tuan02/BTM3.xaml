@@ -1,0 +1,69 @@
+﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan02.BTM3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quản lý bán vé rạp phim" Height="400" Width="600" Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="Seat" TargetType="Button">
+            <Setter Property="Width" Value="78"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10,10,10,10"/>
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="Width" Value="75"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="10,10,10,10"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="MÀN ẢNH" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="236,10,226,10" FontWeight="Bold" FontSize="24" Background="White" Foreground="#FFE69302" Height="42" Width="130"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="182" Grid.Row="1" VerticalAlignment="Center" Width="519" Margin="32,10,41,8" CornerRadius="12" Background="#FFA6A6A6">
+            <Grid Margin="9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="98"/>
+                    <ColumnDefinition Width="98"/>
+                    <ColumnDefinition Width="98"/>
+                    <ColumnDefinition Width="98"/>
+                    <ColumnDefinition Width="98"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
+                </Grid.RowDefinitions>
+                <Button Content="1" Style="{StaticResource Seat}" Click="Button_Click"/>
+                <Button Content="2" Style="{StaticResource Seat}" Grid.Column="1" Click="Button_Click"/>
+                <Button Content="3" Style="{StaticResource Seat}" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="4" Style="{StaticResource Seat}" Grid.Column="3" Click="Button_Click"/>
+                <Button Content="5" Style="{StaticResource Seat}" Grid.Column="4" Click="Button_Click"/>
+                <Button Content="6" Style="{StaticResource Seat}" Grid.Row="1" Click="Button_Click"/>
+                <Button Content="7" Style="{StaticResource Seat}" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
+                <Button Content="8" Style="{StaticResource Seat}" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
+                <Button Content="9" Style="{StaticResource Seat}" Grid.Column="3" Grid.Row="1" Click="Button_Click"/>
+                <Button Content="10" Style="{StaticResource Seat}" Grid.Column="4" Grid.Row="1" Click="Button_Click"/>
+                <Button Content="11" Style="{StaticResource Seat}" Grid.Row="2" Click="Button_Click"/>
+                <Button Content="12" Style="{StaticResource Seat}" Grid.Column="1" Grid.Row="2" Click="Button_Click"/>
+                <Button Content="13" Style="{StaticResource Seat}" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
+                <Button Content="14" Style="{StaticResource Seat}" Grid.Column="3" Grid.Row="2" Click="Button_Click"/>
+                <Button Content="15" Style="{StaticResource Seat}" Grid.Column="4" Grid.Row="2" Click="Button_Click"/>
+            </Grid>
+        </Border>
+        <WrapPanel HorizontalAlignment="Center" Height="56" Margin="10,41,0,0" Grid.Row="2" VerticalAlignment="Top" Width="293">
+            <Button x:Name="btn_thanhToan" Content="Chọn" Style="{StaticResource Button}" Click="btn_thanhToan_Click"/>
+            <Button x:Name="btn_Cancel" Content="Hủy bỏ" Style="{StaticResource Button}" Click="btn_Cancel_Click"/>
+            <Button x:Name="btn_Exit" Content="Kết thúc" Style="{StaticResource Button}" Click="btn_Exit_Click"/>
+        </WrapPanel>
+        <WrapPanel HorizontalAlignment="Center" Height="48" Grid.Row="2" VerticalAlignment="Top" Width="331" Margin="117,0,144,0">
+            <Label Content="Thành tiền : " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
+            <TextBlock x:Name="txt_thanhToan" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="33" Width="230"/>
+        </WrapPanel>
+
+    </Grid>
+</Window>

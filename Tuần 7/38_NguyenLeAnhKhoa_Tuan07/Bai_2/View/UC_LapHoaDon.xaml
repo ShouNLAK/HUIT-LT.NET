@@ -1,0 +1,133 @@
+<UserControl x:Class="_38_NguyenLeAnhKhoa_Tuan07.Bai_2.View.UC_LapHoaDon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Lập hóa đơn" FontSize="22" FontWeight="Bold" Margin="10,5,0,10"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="2.4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="5" Padding="10" BorderBrush="#FFDDDDDD" BorderThickness="1" CornerRadius="8">
+                <StackPanel>
+                    <TextBlock Text="Thông tin khách hàng" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <TextBlock Text="Tên khách hàng"/>
+                    <TextBox Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,0,8"/>
+                    <TextBlock Text="Số điện thoại"/>
+                    <TextBox Text="{Binding SoDienThoai, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,0,8"/>
+                    <TextBlock Text="Số khách"/>
+                    <TextBox Text="{Binding SoKhach, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,0,8"/>
+                    <CheckBox Content="Là sinh viên (giảm 20%)" IsChecked="{Binding LaSinhVien}" Margin="0,0,0,14"/>
+
+                    <TextBlock Text="Chọn bàn" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <UniformGrid Columns="2" Margin="0,0,0,10">
+                        <RadioButton Content="Bàn 01" IsChecked="{Binding IsBan01, Mode=TwoWay}" GroupName="BanAn" Margin="0,0,8,8"/>
+                        <RadioButton Content="Bàn 02" IsChecked="{Binding IsBan02, Mode=TwoWay}" GroupName="BanAn" Margin="0,0,8,8"/>
+                        <RadioButton Content="Bàn 03" IsChecked="{Binding IsBan03, Mode=TwoWay}" GroupName="BanAn" Margin="0,0,8,8"/>
+                        <RadioButton Content="Bàn 04" IsChecked="{Binding IsBan04, Mode=TwoWay}" GroupName="BanAn" Margin="0,0,8,8"/>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Margin="5" Padding="10" BorderBrush="#FFDDDDDD" BorderThickness="1" CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border BorderBrush="#FFE4E4E4" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,0,0,6">
+                        <StackPanel>
+                            <TextBlock Text="Nước uống" FontWeight="Bold" Margin="0,0,0,6"/>
+                            <ItemsControl ItemsSource="{Binding DanhSachNuocUong}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel Margin="0,2,0,2">
+                                            <TextBox Width="48" Text="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsChon}" HorizontalAlignment="Right" Margin="8,0,0,0"/>
+                                            <CheckBox Content="{Binding TenMonHienThi}" IsChecked="{Binding IsChon}"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" BorderBrush="#FFE4E4E4" BorderThickness="1" CornerRadius="8" Padding="8" Margin="0,6,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Thức ăn" FontWeight="Bold" Margin="0,0,0,6"/>
+                            <ItemsControl ItemsSource="{Binding DanhSachThucAn}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel Margin="0,2,0,2">
+                                            <TextBox Width="48" Text="{Binding SoLuong, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsChon}" HorizontalAlignment="Right" Margin="8,0,0,0"/>
+                                            <CheckBox Content="{Binding TenMonHienThi}" IsChecked="{Binding IsChon}"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Margin="5" Padding="10" BorderBrush="#FFDDDDDD" BorderThickness="1" CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Text="Thông tin hóa đơn" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding MaHoaDonTam, StringFormat=Mã hóa đơn: {0}}" Margin="0,0,0,4"/>
+                        <TextBlock Text="{Binding TenKhachHang, StringFormat=Khách: {0}}" Margin="0,0,0,4"/>
+                        <TextBlock Text="{Binding SoDienThoai, StringFormat=SĐT: {0}}" Margin="0,0,0,4"/>
+                        <TextBlock Text="{Binding BanDangChon, StringFormat=Bàn: {0}}" Margin="0,0,0,4"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="2" ItemsSource="{Binding ChiTietHoaDonDangLap}" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,10,0,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tên món" Binding="{Binding TenMon}" Width="*"/>
+                            <DataGridTextColumn Header="SL" Binding="{Binding SoLuong}" Width="60"/>
+                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}" Width="90"/>
+                            <DataGridTextColumn Header="T.Tiền" Binding="{Binding ThanhTien}" Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="3" Margin="0,5,0,0">
+                        <TextBlock Text="{Binding TongTamTinhText, StringFormat=Tạm tính: {0}}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding GiamGiaText, StringFormat=Giảm giá: {0}}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ThanhToanText, StringFormat=Thành tiền: {0}}" FontWeight="Bold" Foreground="#FF1E5DE6"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Margin="5" BorderBrush="#FFDDDDDD" BorderThickness="1" CornerRadius="8" Padding="10">
+            <DockPanel>
+                <TextBlock Text="{Binding ThongBao}" Foreground="#FFB00020" VerticalAlignment="Center" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Button Content="Tính tiền" Width="100" Height="32" Margin="0,0,8,0" Command="{Binding TaoHoaDonCommand}"/>
+                    <Button Content="Nhập lại" Width="100" Height="32" Margin="0,0,8,0" Command="{Binding NhapLaiCommand}"/>
+                    <Button Content="Thanh toán" Width="100" Height="32" Margin="0,0,8,0" Background="#FF2D63E2" Foreground="White" Command="{Binding ThanhToanCommand}"/>
+                    <Button Content="Thoát" Width="100" Height="32" Command="{Binding ThoatCommand}"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
