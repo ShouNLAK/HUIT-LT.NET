@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan06.ViewModel"
         xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan06.View"
         mc:Ignorable="d"
-        Title="BankView" Height="450" Width="1000">
+        Title="Tuần 6 - MVVM Quản Lý Tài Khoản Ngân Hàng" Height="450" Width="1000">
 
     <Window.DataContext>
         <vm:BankViewModel/>

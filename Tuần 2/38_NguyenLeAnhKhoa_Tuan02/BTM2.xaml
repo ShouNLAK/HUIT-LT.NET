@@ -1,7 +1,7 @@
-﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan02.BTM2"
+<Window x:Class="_38_NguyenLeAnhKhoa_Tuan02.BTM2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BTM2" Height="450" Width="800">
+        Title="Tuần 2 - WPF Control Nâng Cao - BTM2" Height="450" Width="800">
     <StackPanel Background="{DynamicResource BackgroundColor}"
                 VerticalAlignment="Top">
 

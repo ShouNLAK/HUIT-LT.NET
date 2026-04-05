@@ -1,7 +1,7 @@
-﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan01.BTM7"
+<Window x:Class="_38_NguyenLeAnhKhoa_Tuan01.BTM7"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Bài tập mẫu 7" Height="400" Width="600">
+        Title="Tuần 1 - WPF Control Cơ Bản - BTM7" Height="400" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>

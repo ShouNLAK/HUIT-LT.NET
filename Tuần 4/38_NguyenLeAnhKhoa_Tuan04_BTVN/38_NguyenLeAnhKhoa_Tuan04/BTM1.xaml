@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan04"
         mc:Ignorable="d"
-        Title="Bài tập mẫu 1" Height="450" Width="800">
+        Title="Tuần 4 - Menu, ToolBar và UserControl" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="65"/>

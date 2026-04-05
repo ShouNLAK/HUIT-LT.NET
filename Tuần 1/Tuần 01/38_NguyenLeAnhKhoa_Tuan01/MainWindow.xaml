@@ -1,7 +1,7 @@
-﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan01.MainWindow"
+<Window x:Class="_38_NguyenLeAnhKhoa_Tuan01.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Tuần 1 - Màn hình tổng hợp bài tập" Height="350" Width="525">
     <Grid>
         
     </Grid>

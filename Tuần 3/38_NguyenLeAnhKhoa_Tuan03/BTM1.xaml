@@ -1,7 +1,7 @@
-﻿<Window x:Class="_38_NguyenLeAnhKhoa_Tuan03.BTM1"
+<Window x:Class="_38_NguyenLeAnhKhoa_Tuan03.BTM1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Bài tập mẫu 1" Height="250" Width="350"
+        Title="Tuần 3 - Form Nâng Cao - BTM1" Height="250" Width="350"
         ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="LabelFormat" TargetType="Label">

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan06.View"
         xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan06.ViewModel"
         mc:Ignorable="d"
-        Title="DepartmentView" Height="450" Width="1000">
+        Title="Tuần 6 - Quản lý phòng ban MVVM" Height="450" Width="1000">
     <Window.DataContext>
         <vm:PBNVViewModel />
     </Window.DataContext>

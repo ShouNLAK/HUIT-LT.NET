@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan07.Bai_1.View"
         xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan07.Bai_1.ViewModel"
         mc:Ignorable="d"
-        Title="Quản lý tài khoản ngân hàng" Height="550" Width="1200">
+        Title="Tuần 7 - Quản lý tài khoản ngân hàng theo MVVM" Height="550" Width="1200">
 
     <Window.DataContext>
         <vm:MainViewModel/>
@@ -44,7 +44,7 @@
                     <Button Content="Lịch sử giao dịch" Margin="0,0,0,10" Width="190" Height="25" Command="{Binding navigation_LS}"/>
                 </StackPanel>
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Row="2" CornerRadius="10,10,10,10" Margin="10,3,10,3">
-                    <Label Content="Gợi ý: Mỗi chức năng là UserControl. &#xD;&#xA;MainWindows chỉ có nhiệm vụ điều hướng" FontSize="9" HorizontalAlignment="Center"/>
+                    <Label Content="Gợi ý: Mỗi chức năng là một UserControl. &#xD;&#xA;MainWindow chỉ thực hiện điều hướng." FontSize="9" HorizontalAlignment="Center"/>
                 </Border>
             </Grid>
         </Border>

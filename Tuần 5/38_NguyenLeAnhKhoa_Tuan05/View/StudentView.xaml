@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan05.View"
         xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan05.ViewModel"
         mc:Ignorable="d"
-        Title="Bài tập mẫu 1" Height="450" Width="800">
+        Title="Tuần 5 - DataGrid, Binding và CollectionView" Height="450" Width="800">
     <Window.DataContext>
         <vm:StudentViewModel/>
     </Window.DataContext>

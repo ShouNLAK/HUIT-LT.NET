@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:_38_NguyenLeAnhKhoa_Tuan06.ViewModel"
         mc:Ignorable="d"
-        Title="ClassView" Height="760" Width="1000">
+        Title="Tuần 6 - Quản lý lớp học MVVM" Height="760" Width="1000">
     <Window.DataContext>
         <vm:ClassViewModel />
     </Window.DataContext>
