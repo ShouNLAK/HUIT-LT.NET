@@ -1,0 +1,60 @@
+﻿<Window x:Class="_18_NguyenLeAnhKhoa.View.Bai1_Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_18_NguyenLeAnhKhoa.View"
+        mc:Ignorable="d"
+                Title="MainWindow" Height="650" Width="800" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Closing="Window_Closing">
+    <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Margin="20,20,20,20" Background="White">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Nhập thông tin khách thuê phòng" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="36" Grid.ColumnSpan="2"/>
+            <DockPanel LastChildFill="True" Grid.Row="1" VerticalAlignment="Center">
+                <Label Content="Mã khách thuê: " FontWeight="Bold" FontSize="16" MinWidth="135"/>
+                <TextBox x:Name="txt_MaKH" TextWrapping="Wrap" Text=""/>
+            </DockPanel>
+            <DockPanel LastChildFill="True" Grid.Row="2" VerticalAlignment="Center">
+                <Label Content="Họ và tên: " FontWeight="Bold" FontSize="16" MinWidth="135"/>
+                <TextBox x:Name="txt_HoTenKH" TextWrapping="Wrap" Text=""/>
+            </DockPanel>
+            <DockPanel LastChildFill="True" Grid.Row="3" VerticalAlignment="Center">
+                <Label Content="Giới tính: " FontWeight="Bold" FontSize="16" MinWidth="135"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <RadioButton x:Name="rdo_Nam" Content="Nam" Margin="20,0,20,0" Checked="rdo_Nam_Checked"/>
+                    <RadioButton x:Name="rdo_Nu" Content="Nữ"  Margin="20,0,20,0" Checked="rdo_Nu_Checked"/>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel LastChildFill="True" Grid.Row="4" VerticalAlignment="Center">
+                <Label Content="Loại phòng: " FontWeight="Bold" FontSize="16" MinWidth="135"/>
+                <ComboBox x:Name="cbo_LoaiPhong"/>
+            </DockPanel>
+            <GroupBox Grid.Column="1" Grid.RowSpan="4"  Header="Tiện ích đăng ký thêm" Grid.Row="1">
+                <StackPanel Margin="5,5,5,5">
+                    <CheckBox x:Name="chk_TIch_MayLanh" Content="Máy lạnh" Margin="1,1,0,0"/>
+                    <CheckBox x:Name="chk_TIch_Wifi" Content="Wifi" Margin="1,1,0,0"/>
+                    <CheckBox x:Name="chk_TIch_GiuXe" Content="Giữ xe" Margin="1,1,0,0"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Column="1" Header="Dịch vụ sử dụng" Grid.Row="5" Margin="5,5,5,5">
+                <ListBox x:Name="lst_DichVu" SelectionMode="Multiple"/>
+            </GroupBox>
+            <StackPanel Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button x:Name="btn_Luu" Content="Lưu" Height="25" Width="75" Margin="20,0,20,0" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" FontWeight="Bold" Click="btn_Luu_Click"/>
+                <Button x:Name="btn_Thoat" Content="Thoát" Height="25" Width="75" Margin="20,0,20,0" FontWeight="Bold" Click="btn_Thoat_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
