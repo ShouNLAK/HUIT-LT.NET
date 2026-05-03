@@ -45,7 +45,7 @@
                 <DataGridTextColumn Header="Mã sinh viên" Width="1*" Binding="{Binding MaSinhVien}"/>
                 <DataGridTextColumn Header="Họ tên" Width="2*" Binding="{Binding SinhVien.HoTen}"/>
                 <DataGridTextColumn Header="Lớp" Width="2*" Binding="{Binding SinhVien.MaLop}"/>
-                <DataGridTextColumn Header="Điểm" Width="2*" Binding="{Binding Diem}"/>
+                <DataGridTextColumn Header="Điểm" Width="2*" Binding="{Binding Diem, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
 

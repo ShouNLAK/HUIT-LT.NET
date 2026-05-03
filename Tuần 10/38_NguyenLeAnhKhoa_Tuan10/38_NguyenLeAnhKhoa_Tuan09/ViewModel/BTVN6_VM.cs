@@ -43,20 +43,54 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
                 MessageBox.Show("Vui lòng chọn đầy đủ Môn học - Năm học - Học kỳ.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            var dsSinhVien = db.SinhVien.ToList();
+            var dsKetQua = db.KetQua.Where(k => k.MaMonHoc == Selected_MonHoc
+                                             && k.NamHoc == Selected_NamHoc
+                                             && k.HocKy == Selected_HocKy.Value).ToList();
             DS_KetQua = new ObservableCollection<KetQua>(
-                db.KetQua.Where(k => k.MaMonHoc == Selected_MonHoc
-                                  && k.NamHoc == Selected_NamHoc
-                                  && k.HocKy == Selected_HocKy.Value).ToList());
-            if (DS_KetQua.Count == 0)
-            {
-                MessageBox.Show("Không tìm thấy kết quả nào cho môn học và kỳ học đã chọn.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+                dsSinhVien.Select(sv =>
+                {
+                    var existing = dsKetQua.FirstOrDefault(k => k.MaSinhVien == sv.MaSinhVien);
+                    if (existing != null)
+                    {
+                        existing.SinhVien = sv;
+                        return existing;
+                    }
+                    return new KetQua
+                    {
+                        MaSinhVien = sv.MaSinhVien,
+                        MaMonHoc = Selected_MonHoc,
+                        NamHoc = Selected_NamHoc,
+                        HocKy = Selected_HocKy.Value,
+                        Diem = null,
+                        SinhVien = sv
+                    };
+                }).ToList());
             OnPropertyChanged(nameof(DS_KetQua));
         }
         public RelayCommand SaveCommand { get; set; }
         public void Save()
         {
+            if (string.IsNullOrWhiteSpace(Selected_MonHoc) ||
+                        string.IsNullOrWhiteSpace(Selected_NamHoc) ||
+                        !Selected_HocKy.HasValue)
+            {
+                MessageBox.Show("Vui lòng chọn đầy đủ Môn học - Năm học - Học kỳ.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (DS_KetQua == null || DS_KetQua.Count == 0)
+            {
+                MessageBox.Show("Chưa có danh sách sinh viên.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            foreach (var ketQua in DS_KetQua)
+            {
+                if (!ketQua.Diem.HasValue || ketQua.Diem < 0 || ketQua.Diem > 10)
+                {
+                    MessageBox.Show("Điểm không hợp lệ hoặc còn trống.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
             foreach (var ketQua in DS_KetQua)
             {
                 var existingEntry = db.KetQua.FirstOrDefault(k => k.MaSinhVien == ketQua.MaSinhVien
@@ -69,7 +103,14 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
                 }
                 else
                 {
-                    db.KetQua.Add(ketQua);
+                    db.KetQua.Add(new KetQua
+                    {
+                        MaSinhVien = ketQua.MaSinhVien,
+                        MaMonHoc = ketQua.MaMonHoc,
+                        NamHoc = ketQua.NamHoc,
+                        HocKy = ketQua.HocKy,
+                        Diem = ketQua.Diem
+                    });
                 }
             }
             db.SaveChanges();

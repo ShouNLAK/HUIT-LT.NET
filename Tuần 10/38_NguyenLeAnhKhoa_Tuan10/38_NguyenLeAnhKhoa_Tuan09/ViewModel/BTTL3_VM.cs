@@ -13,7 +13,6 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
     internal class BTTL3_VM : BaseViewModel
     {
         private QLSINHVIENEntities db = new QLSINHVIENEntities();
-        public ObservableCollection<Lop> DS_Lop_Original { get; set; }
         private ObservableCollection<Lop> ds_Lop;
         public ObservableCollection<Lop> DS_Lop
         {
@@ -33,22 +32,21 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
             set
             {
                 selected_Lop = value;
-                OnPropertyChanged(nameof(selected_Lop));
-                NewLop = value;
-            }
-        }
-        private Lop newLop;
-        public Lop NewLop
-        {
-            get { return newLop; }
-            set
-            {
-                newLop = value;
-                OnPropertyChanged(nameof(newLop));
-                if (newLop != null)
+                OnPropertyChanged(nameof(Selected_Lop));
+                if (!isAdding && !isEditing)
                 {
-                    MaLop = newLop.MaLop;
-                    MaKhoa = newLop.MaKhoa;
+                    if (selected_Lop != null)
+                    {
+                        MaLop = selected_Lop.MaLop;
+                        MaKhoa = selected_Lop.MaKhoa;
+                    }
+                    else
+                    {
+                        MaLop = string.Empty;
+                        MaKhoa = string.Empty;
+                    }
+                    IsUpdateEnabled = selected_Lop != null;
+                    IsDeleteEnabled = selected_Lop != null;
                 }
             }
         }
@@ -59,7 +57,7 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
             set
             {
                 maLop = value;
-                OnPropertyChanged(nameof(maLop));
+                OnPropertyChanged(nameof(MaLop));
             }
         }
         private string maKhoa;
@@ -69,7 +67,75 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
             set
             {
                 maKhoa = value;
-                OnPropertyChanged(nameof(maKhoa));
+                OnPropertyChanged(nameof(MaKhoa));
+            }
+        }
+        private bool isAdding;
+        private bool isEditing;
+
+        private bool isMaLopEnabled = true;
+        public bool IsMaLopEnabled
+        {
+            get { return isMaLopEnabled; }
+            set
+            {
+                isMaLopEnabled = value;
+                OnPropertyChanged(nameof(IsMaLopEnabled));
+            }
+        }
+
+        private bool isAddEnabled = true;
+        public bool IsAddEnabled
+        {
+            get { return isAddEnabled; }
+            set
+            {
+                isAddEnabled = value;
+                OnPropertyChanged(nameof(IsAddEnabled));
+            }
+        }
+
+        private bool isUpdateEnabled;
+        public bool IsUpdateEnabled
+        {
+            get { return isUpdateEnabled; }
+            set
+            {
+                isUpdateEnabled = value;
+                OnPropertyChanged(nameof(IsUpdateEnabled));
+            }
+        }
+
+        private bool isDeleteEnabled;
+        public bool IsDeleteEnabled
+        {
+            get { return isDeleteEnabled; }
+            set
+            {
+                isDeleteEnabled = value;
+                OnPropertyChanged(nameof(IsDeleteEnabled));
+            }
+        }
+
+        private bool isSaveEnabled;
+        public bool IsSaveEnabled
+        {
+            get { return isSaveEnabled; }
+            set
+            {
+                isSaveEnabled = value;
+                OnPropertyChanged(nameof(IsSaveEnabled));
+            }
+        }
+
+        private bool isCancelEnabled;
+        public bool IsCancelEnabled
+        {
+            get { return isCancelEnabled; }
+            set
+            {
+                isCancelEnabled = value;
+                OnPropertyChanged(nameof(IsCancelEnabled));
             }
         }
 
@@ -77,7 +143,8 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
         {
             DS_Lop = new ObservableCollection<Lop>(db.Lop.ToList());
             DS_Khoa = new ObservableCollection<Khoa>(db.Khoa.ToList());
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(DS_Lop));
+            OnPropertyChanged(nameof(DS_Khoa));
         }
         public RelayCommand AddCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
@@ -87,30 +154,31 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
         public BTTL3_VM()
         {
             LoadDL();
-            DS_Lop_Original = new ObservableCollection<Lop>(DS_Lop.ToList());
+            IsAddEnabled = true;
+            IsUpdateEnabled = false;
+            IsDeleteEnabled = false;
+            IsSaveEnabled = false;
+            IsCancelEnabled = false;
+            IsMaLopEnabled = true;
             AddCommand = new RelayCommand(o => Add());
-            DeleteCommand = new RelayCommand(o => Delete(), o => selected_Lop != null);
-            UpdateCommand = new RelayCommand(o => Update(), o => selected_Lop != null);
-            SaveCommand = new RelayCommand(o => Save(), 
-                o => DS_Lop.Any(l => !DS_Lop_Original.Any(ol => ol.MaLop == l.MaLop && ol.MaKhoa == l.MaKhoa)) || DS_Lop_Original.Any(ol => !DS_Lop.Any(l => l.MaLop == ol.MaLop && l.MaKhoa == ol.MaKhoa)));
-            CancelCommand = new RelayCommand(o => LoadDL(),
-                o => DS_Lop.Any(l => !DS_Lop_Original.Any(ol => ol.MaLop == l.MaLop && ol.MaKhoa == l.MaKhoa)) || DS_Lop_Original.Any(ol => !DS_Lop.Any(l => l.MaLop == ol.MaLop && l.MaKhoa == ol.MaKhoa)));
+            DeleteCommand = new RelayCommand(o => Delete());
+            UpdateCommand = new RelayCommand(o => Update());
+            SaveCommand = new RelayCommand(o => Save());
+            CancelCommand = new RelayCommand(o => Cancel());
         }
         public void Add()
         {
-            if (string.IsNullOrWhiteSpace(MaLop) || string.IsNullOrWhiteSpace(MaKhoa))
-            {
-                MessageBox.Show("Nhập đầy đủ dữ liệu", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (DS_Lop.Any(x => x.MaLop == MaLop))
-            {
-                MessageBox.Show("Mã lớp đã tồn tại trong danh sách", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            DS_Lop.Add(new Lop { MaLop = MaLop, MaKhoa = MaKhoa });
+            isAdding = true;
+            isEditing = false;
+            Selected_Lop = null;
+            MaLop = string.Empty;
+            MaKhoa = string.Empty;
+            IsMaLopEnabled = true;
+            IsAddEnabled = false;
+            IsUpdateEnabled = false;
+            IsDeleteEnabled = false;
+            IsSaveEnabled = true;
+            IsCancelEnabled = true;
         }
 
         public void Delete()
@@ -120,9 +188,32 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
                 MessageBox.Show("Chọn lớp cần xóa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            DS_Lop.Remove(Selected_Lop);
+            if (db.SinhVien.Any(sv => sv.MaLop == Selected_Lop.MaLop))
+            {
+                MessageBox.Show("Không thể xóa lớp đang có sinh viên", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var result = MessageBox.Show("Bạn có chắc muốn xóa lớp này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+            var lop = db.Lop.Find(Selected_Lop.MaLop);
+            if (lop != null)
+            {
+                db.Lop.Remove(lop);
+                db.SaveChanges();
+            }
+            LoadDL();
             Selected_Lop = null;
+            MaLop = string.Empty;
+            MaKhoa = string.Empty;
+            IsMaLopEnabled = true;
+            IsAddEnabled = true;
+            IsUpdateEnabled = false;
+            IsDeleteEnabled = false;
+            IsSaveEnabled = false;
+            IsCancelEnabled = false;
         }
 
         public void Update()
@@ -132,56 +223,87 @@ namespace _38_NguyenLeAnhKhoa_Tuan09.ViewModel
                 MessageBox.Show("Chọn lớp cần sửa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            if (string.IsNullOrWhiteSpace(MaKhoa))
+            if (db.SinhVien.Any(sv => sv.MaLop == Selected_Lop.MaLop))
             {
-                MessageBox.Show("Mã khoa không hợp lệ", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Không thể sửa lớp đang có sinh viên", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            Selected_Lop.MaKhoa = MaKhoa;
-            OnPropertyChanged(nameof(DS_Lop));
+            isAdding = false;
+            isEditing = true;
+            IsMaLopEnabled = false;
+            IsAddEnabled = false;
+            IsUpdateEnabled = false;
+            IsDeleteEnabled = false;
+            IsSaveEnabled = true;
+            IsCancelEnabled = true;
         }
         public void Save()
         {
-            var maLopHienTai = DS_Lop.Select(l => l.MaLop).ToList();
-            var lopToRemove = db.Lop.Where(l => !maLopHienTai.Contains(l.MaLop)).ToList();
-            foreach (var lop in lopToRemove)
+            if (string.IsNullOrWhiteSpace(MaLop) || string.IsNullOrWhiteSpace(MaKhoa))
             {
-                db.Lop.Remove(lop);
+                MessageBox.Show("Nhập đầy đủ dữ liệu", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-
-            foreach (Lop lop in DS_Lop)
+            if (isAdding)
             {
-                var existingLop = db.Lop.Find(lop.MaLop);
-                if (existingLop == null)
+                if (db.Lop.Any(l => l.MaLop == MaLop))
                 {
-                    db.Lop.Add(new Lop { MaLop = lop.MaLop, MaKhoa = lop.MaKhoa });
+                    MessageBox.Show("Mã lớp đã tồn tại", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                else
+                db.Lop.Add(new Lop { MaLop = MaLop, MaKhoa = MaKhoa });
+            }
+            else if (isEditing)
+            {
+                if (db.SinhVien.Any(sv => sv.MaLop == MaLop))
                 {
-                    existingLop.MaKhoa = lop.MaKhoa;
+                    MessageBox.Show("Không thể sửa lớp đang có sinh viên", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
+                var lop = db.Lop.Find(MaLop);
+                if (lop == null)
+                {
+                    MessageBox.Show("Không tìm thấy lớp cần sửa", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                lop.MaKhoa = MaKhoa;
+            }
+            else
+            {
+                return;
             }
 
             db.SaveChanges();
             LoadDL();
-            DS_Lop_Original = new ObservableCollection<Lop>(
-                DS_Lop.Select(x => new Lop { MaLop = x.MaLop, MaKhoa = x.MaKhoa })
-            );
-
+            isAdding = false;
+            isEditing = false;
+            Selected_Lop = null;
+            MaLop = string.Empty;
+            MaKhoa = string.Empty;
+            IsMaLopEnabled = true;
+            IsAddEnabled = true;
+            IsUpdateEnabled = false;
+            IsDeleteEnabled = false;
+            IsSaveEnabled = false;
+            IsCancelEnabled = false;
             MessageBox.Show("Đã lưu thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
         public void Cancel()
         {
-            DS_Lop = new ObservableCollection<Lop>(
-                DS_Lop_Original.Select(x => new Lop { MaLop = x.MaLop, MaKhoa = x.MaKhoa })
-            );
-            db.SaveChanges();
+            isAdding = false;
+            isEditing = false;
+            LoadDL();
             Selected_Lop = null;
-            MessageBox.Show("Đã hủy thay đổi", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            MaLop = string.Empty;
+            MaKhoa = string.Empty;
+            IsMaLopEnabled = true;
+            IsAddEnabled = true;
+            IsUpdateEnabled = false;
+            IsDeleteEnabled = false;
+            IsSaveEnabled = false;
+            IsCancelEnabled = false;
         }
     }
 }

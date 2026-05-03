@@ -31,7 +31,7 @@
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Grid.Row="1">
                     <Label Content="Mã sinh viên :"/>
-                    <TextBox TextWrapping="Wrap" Text="{Binding MaSinhVien}"/>
+                    <TextBox TextWrapping="Wrap" Text="{Binding MaSinhVien}" IsEnabled="{Binding IsMaSinhVienEnabled}"/>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Grid.Row="2">
                     <Label Content="Họ tên :"/>
@@ -50,14 +50,14 @@
                     <ComboBox ItemsSource="{Binding DS_Lop}" 
                               DisplayMemberPath="MaLop" 
                               SelectedValuePath="MaLop" 
-                              SelectedValue="{Binding Selected_SinhVien.MaLop}"/>
+                              SelectedValue="{Binding MaLop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Content="Thêm" Width="50" Margin="10,0,10,0"/>
-                    <Button Content="Sửa" Width="50" Margin="10,0,10,0"/>
-                    <Button Content="Xóa" Width="50" Margin="10,0,10,0"/>
-                    <Button Content="Lưu" Width="50" Margin="10,0,10,0"/>
-                    <Button Content="Hủy" Width="50" Margin="10,0,10,0"/>
+                    <Button Content="Thêm" Width="50" Margin="10,0,10,0" Command="{Binding AddCommand}" IsEnabled="{Binding IsAddEnabled}"/>
+                    <Button Content="Sửa" Width="50" Margin="10,0,10,0" Command="{Binding UpdateCommand}" IsEnabled="{Binding IsUpdateEnabled}"/>
+                    <Button Content="Xóa" Width="50" Margin="10,0,10,0" Command="{Binding DeleteCommand}" IsEnabled="{Binding IsDeleteEnabled}"/>
+                    <Button Content="Lưu" Width="50" Margin="10,0,10,0" Command="{Binding SaveCommand}" IsEnabled="{Binding IsSaveEnabled}"/>
+                    <Button Content="Hủy" Width="50" Margin="10,0,10,0" Command="{Binding CancelCommand}" IsEnabled="{Binding IsCancelEnabled}"/>
                 </StackPanel>
 
             </Grid>

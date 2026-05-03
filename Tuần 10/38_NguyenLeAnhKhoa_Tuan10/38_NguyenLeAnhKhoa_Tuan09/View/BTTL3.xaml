@@ -40,11 +40,11 @@
                               SelectedValue="{Binding MaKhoa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Content="Thêm" Width="50" Margin="10,0,10,0" Command="{Binding AddCommand}"/>
-                    <Button Content="Sửa" Width="50" Margin="10,0,10,0" Command="{Binding UpdateCommand}"/>
-                    <Button Content="Xóa" Width="50" Margin="10,0,10,0" Command="{Binding DeleteCommand}"/>
-                    <Button Content="Lưu" Width="50" Margin="10,0,10,0" Command="{Binding SaveCommand}"/>
-                    <Button Content="Hủy" Width="50" Margin="10,0,10,0" Command="{Binding CancelCommand}"/>
+                    <Button Content="Thêm" Width="50" Margin="10,0,10,0" Command="{Binding AddCommand}" IsEnabled="{Binding IsAddEnabled}"/>
+                    <Button Content="Sửa" Width="50" Margin="10,0,10,0" Command="{Binding UpdateCommand}" IsEnabled="{Binding IsUpdateEnabled}"/>
+                    <Button Content="Xóa" Width="50" Margin="10,0,10,0" Command="{Binding DeleteCommand}" IsEnabled="{Binding IsDeleteEnabled}"/>
+                    <Button Content="Lưu" Width="50" Margin="10,0,10,0" Command="{Binding SaveCommand}" IsEnabled="{Binding IsSaveEnabled}"/>
+                    <Button Content="Hủy" Width="50" Margin="10,0,10,0" Command="{Binding CancelCommand}" IsEnabled="{Binding IsCancelEnabled}"/>
                 </StackPanel>
 
             </Grid>
