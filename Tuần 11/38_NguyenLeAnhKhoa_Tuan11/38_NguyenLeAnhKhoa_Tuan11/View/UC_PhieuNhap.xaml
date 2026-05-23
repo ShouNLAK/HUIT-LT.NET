@@ -17,28 +17,32 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
                     <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <StackPanel>
                     <Label Content="Thông tin phiếu nhập" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <Label Content="Ngày nhập"/>
-                    <DatePicker/>
+                    <DatePicker SelectedDate="{Binding NgayNhap}" IsEnabled="False"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2">
                     <Label Content="Nhà cung cấp"/>
-                    <ComboBox/>
+                    <ComboBox ItemsSource="{Binding DS_NhaCungCap}" SelectedItem="{Binding SelectedNhaCungCap}"
+                              DisplayMemberPath="TENNCC" IsEnabled="{Binding IsChonNhaCungCapEnabled}"/>
                 </StackPanel>
                 <Border BorderThickness="1" Grid.Row="3" Background="#FFD8D8D8" CornerRadius="10,10,10,10">
                     <StackPanel>
                         <Label Content="Tổng tiền"/>
-                        <Label Content="Số tiền" FontWeight="Bold" HorizontalAlignment="Right"/>
+                        <TextBlock FontWeight="Bold" HorizontalAlignment="Right">
+                            <Run Text="{Binding TongTien, StringFormat=N0}"/>
+                            <Run Text=" đ"/>
+                        </TextBlock>
                     </StackPanel>
                 </Border>
-                <Button Content="Tạo phiếu" Grid.Row="4" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Foreground="White" FontWeight="Bold" Margin="10,10,10,10"/>
+                <Button Content="TẠO PHIẾU" Grid.Row="4" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+                        Foreground="White" FontWeight="Bold" Margin="10,10,10,10" Command="{Binding TaoPhieuCommand}" IsEnabled="{Binding IsTaoPhieuEnabled}"/>
 
             </Grid>
         </Border>
@@ -52,22 +56,27 @@
                 </Grid.RowDefinitions>
                 <Label Content="Chi tiết phiếu nhập" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ComboBox Width="125" Margin="15,0,15,0"/>
-                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="50" Margin="15,0,15,0"/>
-                    <TextBox TextWrapping="Wrap" Text="TextBox" Width="50" Margin="15,0,15,0"/>
-                    <Button Content="Button" Margin="15,0,15,0"/>
+                    <ComboBox Width="180" Margin="15,0,15,0" ItemsSource="{Binding DS_SanPham}" SelectedItem="{Binding SelectedSanPham}" DisplayMemberPath="TENSANPHAM"/>
+                    <TextBox TextWrapping="Wrap" Width="60" Margin="15,0,15,0" Text="{Binding SoLuongNhap, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox TextWrapping="Wrap" Width="90" Margin="15,0,15,0" Text="{Binding DonGiaNhap, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Thêm" Margin="15,0,15,0" Command="{Binding ThemChiTietCommand}"/>
                 </StackPanel>
-                <DataGrid Grid.Row="2">
+                <DataGrid Grid.Row="2" ItemsSource="{Binding DS_ChiTiet}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Sản phẩm" Width="2*"/>
-                        <DataGridTextColumn Header="Số lượng" Width="1*"/>
-                        <DataGridTextColumn Header="Đơn giá" Width="1*"/>
-                        <DataGridTextColumn Header="Thành tiền" Width="2*"/>
+                        <DataGridTextColumn Header="Sản phẩm" Width="2*" Binding="{Binding TenSanPham}"/>
+                        <DataGridTextColumn Header="Số lượng" Width="1*" Binding="{Binding SoLuong}"/>
+                        <DataGridTextColumn Header="Đơn giá" Width="1*" Binding="{Binding DonGia, StringFormat=N0}"/>
+                        <DataGridTextColumn Header="Thành tiền" Width="2*" Binding="{Binding ThanhTien, StringFormat=N0}"/>
                     </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Xóa chi tiết này" Command="{Binding DataContext.XoaChiTietCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                 </DataGrid>
                 <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button Content="Lưu phiếu" Width="75" Margin="10,0,10,0"/>
-                    <Button Content="Hủy" Width="75" Margin="10,0,10,0"/>
+                    <Button Content="Lưu phiếu" Width="75" Margin="10,0,10,0" Command="{Binding LuuPhieuCommand}" IsEnabled="{Binding IsLuuPhieuEnabled}"/>
+                    <Button Content="Hủy" Width="75" Margin="10,0,10,0" Command="{Binding HuyPhieuCommand}"/>
                 </StackPanel>
             </Grid>
         </Border>

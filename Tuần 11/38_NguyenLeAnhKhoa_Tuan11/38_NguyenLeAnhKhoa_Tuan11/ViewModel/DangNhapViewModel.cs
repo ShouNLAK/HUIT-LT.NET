@@ -21,6 +21,7 @@ namespace _38_NguyenLeAnhKhoa_Tuan11.ViewModel
             {
                 maNV = value;
                 OnPropertyChanged(nameof(MaNV));
+                OnPropertyChanged(nameof(IsInputValid));
             }
         }
         private string matKhau;
@@ -75,6 +76,8 @@ namespace _38_NguyenLeAnhKhoa_Tuan11.ViewModel
                 W_Form main = new W_Form();
                 var vm = new FormViewModel();
                 vm.TenNhanVien = "Xin chào " + nhanVien.TenNV;
+                vm.VaiTro = nhanVien.VaiTro;
+                vm.CurrentNhanVien = nhanVien;
                 main.DataContext = vm;
                 main.Show();
 
@@ -82,7 +85,7 @@ namespace _38_NguyenLeAnhKhoa_Tuan11.ViewModel
                     loginWindow.Close();
             }
             else
-                ThongBao = "Sai tên đăng nhập hoặc mật khẩu. Vui lòng nhập lại";
+                ThongBao = "Sai tên đăng nhập hoặc mật khẩu! Vui lòng nhập lại";
         }
         
     }

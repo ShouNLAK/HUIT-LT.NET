@@ -6,61 +6,64 @@
         xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan11.View"
         xmlns:vm ="clr-namespace:_38_NguyenLeAnhKhoa_Tuan11.ViewModel"
         mc:Ignorable="d"
-        Title="W_Form" Height="600" Width="1000">
+        Title="Quản lý cửa hàng điện máy" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:FormViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="1" Background="#FFC7C7C7" Grid.RowSpan="2">
+        <Border BorderThickness="1" Background="#FFC7C7C7" Grid.RowSpan="2" Margin="10,10,5,10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel>
-                    <Label Content="Hệ thống cửa hàng" FontWeight="Bold" FontSize="24" Grid.RowSpan="2"/>
-                    <Label Content="{Binding TenNhanVien}" Grid.RowSpan="2"/>
+                <StackPanel Margin="0,5,0,10">
+                    <Label Content="HỆ THỐNG CỬA HÀNG" FontWeight="Bold" FontSize="20" Grid.RowSpan="2" HorizontalAlignment="Center"/>
+                    <Label Content="{Binding TenNhanVien}" Grid.RowSpan="2" Margin="0,2,0,0"/>
                 </StackPanel>
 
-                <DockPanel Grid.Row="1" LastChildFill="True">
+                <DockPanel Grid.Row="1" LastChildFill="True" Margin="0,0,0,5">
                     <Expander Header="Hệ thống" IsExpanded="True">
                         <StackPanel>
                             <Button Content="Đổi mật khẩu" Margin="0,5,0,5"/>
-                            <Button Content="Sao lưu" Margin="0,5,0,5"/>
-                            <Button Content="Phục hồi" Margin="0,5,0,5"/>
+                            <Button Content="Sao lưu" Margin="0,5,0,5" IsEnabled="{Binding IsQuanLy}"/>
+                            <Button Content="Phục hồi" Margin="0,5,0,5" IsEnabled="{Binding IsQuanLy}"/>
                             <Button Content="Đăng xuất" Margin="0,5,0,5" Command="{Binding DangXuatCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
                         </StackPanel>
                     </Expander>
                 </DockPanel>
-                <DockPanel Grid.Row="2" LastChildFill="True">
+                <DockPanel Grid.Row="2" LastChildFill="True" Margin="0,0,0,5">
                     <Expander Header="Danh mục" IsExpanded="True">
                         <StackPanel>
-                            <Button Content="Loại sản phẩm" Margin="0,5,0,5"/>
-                            <Button Content="Sản phẩm" Margin="0,5,0,5"/>
-                            <Button Content="Nhà cung cấp" Margin="0,5,0,5"/>
-                            <Button Content="Nhân viên" Margin="0,5,0,5"/>
+                            <Button Content="Loại sản phẩm" Margin="0,5,0,5" IsEnabled="{Binding IsQuanLy}"/>
+                            <Button Content="Sản phẩm" Margin="0,5,0,5" IsEnabled="{Binding IsQuanLy}"/>
+                            <Button Content="Nhà cung cấp" Margin="0,5,0,5" IsEnabled="{Binding IsQuanLy}"/>
+                            <Button Content="Nhân viên" Margin="0,5,0,5" IsEnabled="{Binding IsQuanLy}"/>
                         </StackPanel>
                     </Expander>
                 </DockPanel>
-                <DockPanel Grid.Row="3" LastChildFill="True">
+                <DockPanel Grid.Row="3" LastChildFill="True" Margin="0,0,0,5">
                     <Expander Header="Nhập hàng" IsExpanded="True">
                         <StackPanel>
-                            <Button Content="Lập phiếu nhập" Margin="0,5,0,5"/>
+                            <Button Content="Lập phiếu nhập" Margin="0,5,0,5" Command="{Binding MoPhieuNhapCommand}" IsEnabled="{Binding IsNhapHangVisible}"/>
                         </StackPanel>
                     </Expander>
                 </DockPanel>
                 <DockPanel Grid.Row="4" LastChildFill="True">
                     <Expander Header="Thống kê" IsExpanded="True">
                         <StackPanel>
-                            <Button Content="Thống kê tồn kho" Margin="0,5,0,5"/>
-                            <Button Content="Thống kê nhập" Margin="0,5,0,5"/>
+                            <Button Content="Thống kê tồn kho" Margin="0,5,0,5" IsEnabled="{Binding IsThongKeTonKhoVisible}"/>
+                            <Button Content="Thống kê nhập" Margin="0,5,0,5" IsEnabled="{Binding IsThongKeNhapVisible}"/>
                         </StackPanel>
                     </Expander>
                 </DockPanel>
@@ -69,7 +72,9 @@
             </Grid>
 
         </Border>
-        <ContentControl Grid.Column="1" Content="ContentControl" />
+        <Border Grid.Column="1" Margin="5,10,10,10" Background="White" BorderBrush="#FFD0D0D0" BorderThickness="1">
+            <ContentControl Content="{Binding CurrentView}" />
+        </Border>
 
     </Grid>
 </Window>

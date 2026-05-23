@@ -25,5 +25,16 @@ namespace _38_NguyenLeAnhKhoa_Tuan11.View
             InitializeComponent();
             DataContext = new DangNhapViewModel();
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as DangNhapViewModel;
+            if (vm == null)
+                return;
+
+            var passwordBox = sender as PasswordBox;
+            if (passwordBox != null)
+                vm.MatKhau = passwordBox.Password;
+        }
     }
 }
