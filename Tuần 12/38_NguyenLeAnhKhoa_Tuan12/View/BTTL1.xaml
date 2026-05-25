@@ -1,0 +1,23 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_38_NguyenLeAnhKhoa_Tuan12.View"
+        xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="_38_NguyenLeAnhKhoa_Tuan12.View.BTTL1"
+        mc:Ignorable="d"
+        Title="BTTL1" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btn_Report" Content="Show Report" Margin="10,13,621,13" FontWeight="Bold" FontSize="20" Click="btn_Report_Click"/>
+        <DockPanel LastChildFill="True" Grid.Row="1">
+            <Viewer:CrystalReportsViewer x:Name="rpt_DSSV"/>
+        </DockPanel>
+
+
+
+    </Grid>
+</Window>
