@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using _38_NguyenLeAnhKhoa_Tuan12.Model;
 using System.Windows;
 using _38_NguyenLeAnhKhoa_Tuan12.Helper;
+using _38_NguyenLeAnhKhoa_Tuan12.View;
 
 namespace _38_NguyenLeAnhKhoa_Tuan12.ViewModel
 {
     internal class BTVN6_VM : BaseViewModel
     {
+        public RelayCommand InBangDiemCommand { get; set; }
         private QLSINHVIENEntities db = new QLSINHVIENEntities();
         public ObservableCollection<KetQua> DS_KetQua { get; set; }
         public ObservableCollection<SinhVien> DS_SinhVien { get; set; }
@@ -30,8 +32,14 @@ namespace _38_NguyenLeAnhKhoa_Tuan12.ViewModel
         public BTVN6_VM()
         {
             LoadDL();
+            InBangDiemCommand = new RelayCommand(_ => InBangDiem());
             TaiDanhSachSinhVienCommand = new RelayCommand(p => LoadSV());
             SaveCommand = new RelayCommand(p => Save(), p => DS_KetQua.Count > 0);
+        }
+        public void InBangDiem()
+        {
+            ViewInBangDiem frm = new ViewInBangDiem(Selected_MonHoc, Selected_NamHoc, Selected_HocKy.Value);
+            frm.ShowDialog();
         }
         public RelayCommand TaiDanhSachSinhVienCommand { get; set; }
         public void LoadSV()

@@ -76,10 +76,47 @@
     </ApplicationDefinition>
     <Compile Include="Helper\BaseViewModel.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
+    <Compile Include="Model\CHITIETPHIEUNHAP.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LOAISANPHAM.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NHACUNGCAP.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NhanVien.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHIEUNHAP.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLHangHoa.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLHangHoa.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLHangHoa.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLHangHoa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLHangHoa.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SANPHAM.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TONKHO_NGAY.cs">
+      <DependentUpon>QLHangHoa.tt</DependentUpon>
+    </Compile>
     <Compile Include="Report\Report_BangDiem.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Report_BangDiem.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\Report_DSSV.cs">
       <AutoGen>True</AutoGen>
@@ -93,7 +130,15 @@
       <DependentUpon>Report_DSSV_Lop.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\Report_NhapHang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Report_NhapHang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ViewModel\BTVN6_VM.cs" />
+    <Compile Include="ViewModel\DangNhapViewModel.cs" />
+    <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="View\BTTL1.xaml.cs">
       <DependentUpon>BTTL1.xaml</DependentUpon>
     </Compile>
@@ -107,6 +152,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\UC_PhieuNhap.xaml.cs">
+      <DependentUpon>UC_PhieuNhap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewInBangDiem.xaml.cs">
+      <DependentUpon>ViewInBangDiem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewInPhieuNhap.xaml.cs">
+      <DependentUpon>ViewInPhieuNhap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\W_DangNhap.xaml.cs">
+      <DependentUpon>W_DangNhap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\W_Form.xaml.cs">
+      <DependentUpon>W_Form.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\BTTL1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +178,26 @@
     <Page Include="View\BTVN6.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UC_PhieuNhap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewInBangDiem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewInPhieuNhap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\W_DangNhap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\W_Form.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -180,10 +260,21 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Report_DSSV_Lop.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Report_NhapHang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Report_NhapHang.cs</LastGenOutput>
+    </EmbeddedResource>
     <EntityDeploy Include="Model\QLSinhVienModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLSinhVienModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model\QLHangHoa.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLHangHoa.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\QLHangHoa.edmx.diagram">
+      <DependentUpon>QLHangHoa.edmx</DependentUpon>
+    </None>
     <None Include="Model\QLSinhVienModel.edmx.diagram">
       <DependentUpon>QLSinhVienModel.edmx</DependentUpon>
     </None>
@@ -197,6 +288,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Model\QLHangHoa.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLHangHoa.edmx</DependentUpon>
+      <LastGenOutput>QLHangHoa.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\QLHangHoa.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLHangHoa.edmx</DependentUpon>
+      <LastGenOutput>QLHangHoa.cs</LastGenOutput>
+    </Content>
     <Content Include="Model\QLSinhVienModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>QLSinhVienModel.Context.cs</LastGenOutput>

@@ -38,7 +38,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Content="Tải danh sách sinh viên" Width="130" Height="35" Margin="20,0,20,0" Command="{Binding TaiDanhSachSinhVienCommand}"/>
             <Button Content="Lưu điểm" Width="130" Height="35" Margin="20,0,20,0" Command="{Binding SaveCommand}"/>
-            <Button Content="In bảng điểm" Width="130" Height="35" Margin="20,0,20,0"/>
+            <Button Content="In bảng điểm" Width="130" Height="35" Margin="20,0,20,0" Command="{Binding InBangDiemCommand}"/>
         </StackPanel>
         <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="1002,162,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <DataGrid Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding DS_KetQua}">
